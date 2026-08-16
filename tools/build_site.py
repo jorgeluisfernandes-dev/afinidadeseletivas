@@ -67,6 +67,15 @@ class Post:
         return BASE_URL + quote(str(self.relpath))
 
 
+@dataclass
+class SitePost:
+    path: Path
+    relpath: PurePosixPath
+    title: str
+    day: date
+    category: str
+
+
 def slugify(value: str) -> str:
     value = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii")
     value = re.sub(r"[^a-zA-Z0-9]+", "-", value.lower()).strip("-")
@@ -393,6 +402,180 @@ def update_recent_sidebar(posts: list[Post]) -> None:
         write_soup(path, soup)
 
 
+def collect_site_posts() -> list[SitePost]:
+    items: list[SitePost] = []
+    archive = OUT / "archive"
+    if not archive.exists():
+        return items
+    for path in archive.glob("[0-9][0-9][0-9][0-9]/[0-9][0-9]/[0-9][0-9]/*.html"):
+        soup = soup_file(path)
+        title_el = soup.select_one(".post-title")
+        date_el = soup.select_one(".date")
+        context = soup.select_one(".post-context")
+        if not title_el or not date_el:
+            continue
+        try:
+            d = datetime.strptime(date_el.get_text(" ", strip=True), "%d/%m/%Y").date()
+        except ValueError:
+            continue
+        category = ""
+        if context:
+            category = context.get_text(" ", strip=True).split("·", 1)[0].strip()
+        if category not in CATEGORY_DIR:
+            posted = soup.select_one(".posted a")
+            category = posted.get_text(" ", strip=True) if posted else ""
+        if category not in CATEGORY_DIR:
+            continue
+        rel = PurePosixPath(path.relative_to(OUT).as_posix())
+        items.append(SitePost(path, rel, title_el.get_text(" ", strip=True), d, category))
+    items.sort(key=lambda p: (p.day, p.title.casefold(), str(p.relpath)))
+    return items
+
+
+def _set_nav_side(soup: BeautifulSoup, container: Tag, label: str, text: str, href: str) -> None:
+    container.clear()
+    lab = soup.new_tag("span"); lab["class"] = ["nav-label"]; lab.string = label; container.append(lab)
+    a = soup.new_tag("a", href=href); a.string = text; container.append(a)
+
+
+def update_new_post_navigation(new_posts: list[Post]) -> None:
+    if not new_posts:
+        return
+    site_posts = collect_site_posts()
+    new_rel = {str(p.relpath) for p in new_posts}
+    historical = [p for p in site_posts if str(p.relpath) not in new_rel]
+    ordered_new = sorted(new_posts, key=lambda p: (p.day, p.title.casefold(), str(p.relpath)))
+
+    # Cada texto novo conhece seu vizinho cronológico; o acervo antigo permanece intocado,
+    # exceto pelo último texto anterior, que ganha a ponte para a primeira publicação nova.
+    for i, post in enumerate(ordered_new):
+        path = OUT / Path(str(post.relpath)); soup = soup_file(path)
+        nav = soup.select_one(".post-navigation")
+        if not nav:
+            continue
+        older_box = nav.select_one(".older"); newer_box = nav.select_one(".newer")
+        older_candidates = [x for x in historical if (x.day, x.title.casefold()) <= (post.day, post.title.casefold())]
+        older = ordered_new[i - 1] if i > 0 else (older_candidates[-1] if older_candidates else None)
+        newer = ordered_new[i + 1] if i + 1 < len(ordered_new) else None
+        if older_box:
+            older_box.clear()
+            if older:
+                if isinstance(older, Post):
+                    href = f"../../../../{older.relpath}"
+                    title = older.title
+                else:
+                    href = f"../../../../{older.relpath}"
+                    title = older.title
+                _set_nav_side(soup, older_box, "Anterior (mais antigo)", f"← {title}", href)
+        if newer_box:
+            newer_box.clear()
+            if newer:
+                _set_nav_side(soup, newer_box, "Próximo (mais recente)", f"{newer.title} →", f"../../../../{newer.relpath}")
+        write_soup(path, soup)
+
+    first = ordered_new[0]
+    previous = [x for x in historical if (x.day, x.title.casefold()) <= (first.day, first.title.casefold())]
+    if previous:
+        old = previous[-1]
+        soup = soup_file(old.path)
+        nav = soup.select_one(".post-navigation")
+        newer_box = nav.select_one(".newer") if nav else None
+        if newer_box:
+            relroot = os.path.relpath(OUT, old.path.parent).replace("\\", "/")
+            prefix = "" if relroot == "." else relroot.rstrip("/") + "/"
+            _set_nav_side(soup, newer_box, "Próximo (mais recente)", f"{first.title} →", f"{prefix}{first.relpath}")
+            write_soup(old.path, soup)
+
+
+def update_global_counts_and_archive_sidebar() -> None:
+    posts = collect_site_posts()
+    cat_counts = {c: 0 for c in CATEGORY_DIR}
+    month_counts: dict[tuple[int, int], int] = {}
+    for p in posts:
+        cat_counts[p.category] += 1
+        month_counts[(p.day.year, p.day.month)] = month_counts.get((p.day.year, p.day.month), 0) + 1
+
+    for path in OUT.rglob("*.html"):
+        soup = soup_file(path)
+        changed = False
+
+        # Contadores da caixa Categorias em qualquer página.
+        for box in soup.select(".rightbar .box"):
+            h = box.find("h2")
+            if not h:
+                continue
+            title = h.get_text(" ", strip=True)
+            if title == "Categorias":
+                for li in box.select("ul > li"):
+                    a = li.find("a")
+                    span = li.find("span", class_="small")
+                    if a and span and a.get_text(" ", strip=True) in cat_counts:
+                        span.string = f"({cat_counts[a.get_text(' ', strip=True)]})"
+                        changed = True
+            elif title == "Arquivo":
+                content = box.select_one(".boxcontent")
+                if content:
+                    content.clear()
+                    rel = os.path.relpath(OUT, path.parent).replace("\\", "/")
+                    prefix = "" if rel == "." else rel.rstrip("/") + "/"
+                    for year in sorted({y for y, _ in month_counts}, reverse=True):
+                        ydiv = soup.new_tag("div"); ydiv["class"] = ["archive-year"]; ydiv.string = str(year); content.append(ydiv)
+                        for month in sorted([m for y, m in month_counts if y == year], reverse=True):
+                            mdiv = soup.new_tag("div"); mdiv["class"] = ["archive-month"]
+                            a = soup.new_tag("a", href=f"{prefix}arquivo/index.html#{year:04d}-{month:02d}")
+                            a.string = f"{MONTHS[month]}: {month_counts[(year, month)]}"
+                            mdiv.append(a); content.append(mdiv)
+                    changed = True
+
+        # Contadores dos Caminhos de leitura da página inicial.
+        if path == OUT / "index.html":
+            for card in soup.select(".reading-path"):
+                a = card.find("a")
+                span = card.find("span", class_="small")
+                if a and span and a.get_text(" ", strip=True) in cat_counts:
+                    span.string = f"({cat_counts[a.get_text(' ', strip=True)]})"
+                    changed = True
+
+        if changed:
+            write_soup(path, soup)
+
+
+def update_tags_index(posts: list[Post]) -> None:
+    if not posts:
+        return
+    path = OUT / "tags" / "index.html"
+    if not path.exists():
+        return
+    soup = soup_file(path)
+    holder = soup.select_one("main .content p")
+    if not holder:
+        return
+
+    entries: dict[str, tuple[str, int]] = {}
+    for a in holder.find_all("a", class_="tag", recursive=False):
+        href = a.get("href", "")
+        slug = href.split("/", 1)[0]
+        txt = a.get_text(" ", strip=True)
+        m = re.match(r"(.*)\s+\((\d+)\)$", txt)
+        if slug and m:
+            entries[slug] = (m.group(1).strip(), int(m.group(2)))
+
+    for post in posts:
+        for tag in post.tags:
+            slug = slugify(tag)
+            if slug in entries:
+                label, count = entries[slug]
+                entries[slug] = (label, count + 1)
+            else:
+                entries[slug] = (tag, 1)
+
+    holder.clear()
+    for slug, (label, count) in sorted(entries.items(), key=lambda x: x[1][0].casefold()):
+        a = soup.new_tag("a", href=f"{slug}/index.html"); a["class"] = ["tag"]; a.string = f"{label} ({count})"
+        holder.append(a); holder.append(" ")
+    write_soup(path, soup)
+
+
 def generate_sitemap() -> None:
     urlset = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for path in sorted(OUT.rglob("*.html")):
@@ -435,7 +618,10 @@ def main() -> int:
     update_category_pages(posts)
     update_archive(posts)
     update_tags(posts)
+    update_tags_index(posts)
     update_recent_sidebar(posts)
+    update_new_post_navigation(posts)
+    update_global_counts_and_archive_sidebar()
     generate_sitemap()
     generate_rss(posts)
     print(f"Site montado em {OUT}")

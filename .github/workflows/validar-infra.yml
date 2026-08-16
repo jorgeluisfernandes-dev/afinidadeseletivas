@@ -31,3 +31,11 @@ jobs:
 
       - name: Validar links e arquivos locais
         run: python tools/validate_site.py
+
+      - name: Guardar site montado para inspeção
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-de-teste
+          path: _site/
+          if-no-files-found: error
+          retention-days: 7
