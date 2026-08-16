@@ -1,0 +1,13 @@
+AfinidadeSeletivas — etapa de publicação automática
+
+Este pacote adiciona apenas um workflow novo:
+.github/workflows/publicar-pages.yml
+
+Ele:
+1. monta o site em _site/;
+2. valida os links e arquivos locais;
+3. prepara o artefato do GitHub Pages;
+4. em push para main (ou execução manual), publica a cópia gerada;
+5. em Pull Request, apenas testa: não publica.
+
+Não contém nenhum post novo.
