@@ -1,0 +1,41 @@
+name: Validar infraestrutura de publicacao
+
+on:
+  push:
+    branches: [infra-publicacao]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v6
+
+      - name: Preparar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Montar copia do site
+        run: python tools/build_site.py
+
+      - name: Validar links e arquivos locais
+        run: python tools/validate_site.py
+
+      - name: Guardar site montado para inspeção
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-de-teste
+          path: _site/
+          if-no-files-found: error
+          retention-days: 7
