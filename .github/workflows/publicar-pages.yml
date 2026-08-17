@@ -36,6 +36,9 @@ jobs:
       - name: Montar site
         run: python tools/build_site.py
 
+      - name: Aplicar decisões editoriais históricas
+        run: python tools/apply_editorial_overrides.py
+
       - name: Inserir Cloudflare Web Analytics
         run: python tools/inject_cloudflare_analytics.py
 
