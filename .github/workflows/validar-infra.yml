@@ -29,6 +29,9 @@ jobs:
       - name: Montar copia do site
         run: python tools/build_site.py
 
+      - name: Aplicar decisões editoriais históricas
+        run: python tools/apply_editorial_overrides.py
+
       - name: Validar links e arquivos locais
         run: python tools/validate_site.py
 
