@@ -1,9 +1,9 @@
 +++
 title = "O conhecimento do Amor"
 date = "2009-02-21"
-category = "Crônica"
-tags = ["amor", "cristianismo", "espiritualidade", "fé"]
-kind = "prose"
+category = "PoemasAfins"
+tags = \["amor", "cristianismo", "espiritualidade", "fé"]
+kind = "poetry"
 summary = "Reflexão poética sobre o Amor como dom de Cristo, que transforma e preenche a alma."
 +++
 
@@ -48,3 +48,4 @@ Não, a migalha do Amor de Cristo é remédio.
 É água que aplaca a sede eternamente...
 
 21/02/2009
+

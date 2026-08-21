@@ -1,9 +1,9 @@
 +++
 title = "Manoel Ricardo de Lima"
 date = "2009-02-12"
-category = "Crônica"
-tags = ["poesia", "amizade", "Goethe", "homenagem"]
-kind = "prose"
+category = "PoemasAfins"
+tags = \["poesia", "amizade", "Goethe", "homenagem"]
+kind = "poetry"
 summary = "Uma breve homenagem ao poeta Manoel Ricardo de Lima, celebrando sua autenticidade e caminho sereno."
 +++
 
@@ -23,3 +23,4 @@ Par délicatesse...
 Entanto lutamos mal rompe a manhã.
 
 12/02/2009
+

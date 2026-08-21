@@ -1,9 +1,9 @@
 +++
 title = "Visita ao Inconsciente"
 date = "2009-02-11"
-category = "Crônica"
-tags = ["inconsciente", "psicologia", "humor", "autoconhecimento"]
-kind = "prose"
+category = "PoemasAfins"
+tags = \["inconsciente", "psicologia", "humor", "autoconhecimento"]
+kind = "poetry"
 summary = "Um diálogo bem-humorado com o inconsciente, entre a sofisticação filosófica e a simplicidade."
 +++
 
@@ -23,3 +23,4 @@ Ele calado, como quem espera a próxima oportunidade de me sacanear...
 É difícil ser sério.
 
 11/02/2009
+
