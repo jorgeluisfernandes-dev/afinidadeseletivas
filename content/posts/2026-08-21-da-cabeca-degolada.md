@@ -2,15 +2,15 @@
 
 title = "Da cabeça degolada."
 
-date = 2026-08-21
+date = "2026-08-21"
 
-category = "PoesiasEletivas"
+category = "poesiaseletivas"
 
-tags = \["Rilke", "soneto", "erotismo", "poesia", "metafísica", "transcendência"]
+tags = \["Rilke", "soneto", "erotismo", "poesia", "metafisica", "transcendencia"]
 
 kind = "poetry"
 
-summary = ""
+summary = "Transdactilo de Rilke."
 
 +++
 
@@ -28,7 +28,7 @@ brilha a breve luz
 
 com seu olhar viril
 
-algo a cegar-te
+algo a cegar-te 
 
 o mamilo e o sexo
 
