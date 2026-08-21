@@ -2,9 +2,9 @@
 
 title = "Da cabeça degolada."
 
-date = "2026-08-21"
+date = 2026-08-21
 
-category = "poesiaseletivas"
+category = "PoesiasEletivas"
 
 tags = \["Rilke", "soneto", "erotismo", "poesia", "metafísica", "transcendência"]
 
@@ -28,7 +28,7 @@ brilha a breve luz
 
 com seu olhar viril
 
-algo a cegar-te 
+algo a cegar-te
 
 o mamilo e o sexo
 
