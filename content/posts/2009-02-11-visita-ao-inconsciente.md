@@ -4,7 +4,7 @@ title = "Visita ao Inconsciente"
 
 date = "2009-02-11"
 
-category = "Crônica"
+category = "poesiasafins"
 
 tags = \["inconsciente", "psicologia", "humor", "autoconhecimento"]
 
@@ -20,27 +20,27 @@ Visita ao Inconsciente
 
 
 
-Vocês pensam que eu não consigo escrever nada sério?  
+Vocês pensam que eu não consigo escrever nada sério?
 
-Pois eu vou lhes dizer:  
+Pois eu vou lhes dizer:
 
-Este blog é uma espécie de terapia verborrágica-cognitiva.  
+Este blog é uma espécie de terapia verborrágica-cognitiva.
 
-Todos precisamos fazer terapia: esse negócio de entrar dentro de si mesmo é muito gostoso...  
+Todos precisamos fazer terapia: esse negócio de entrar dentro de si mesmo é muito gostoso...
 
-Então, eu estou entrando dentro de mim...  
+Então, eu estou entrando dentro de mim...
 
-Fui até o inconsciente.  
+Fui até o inconsciente.
 
-Cheguei lá e insultei o FDP: que estória é essa de dar pitacos no meu blog?  
+Cheguei lá e insultei o FDP: que estória é essa de dar pitacos no meu blog?
 
-Eu estava tentando ser sofisticado, citando Heidegger, e você me vem com essa coisa simplória, filosofia de Praia Grande? Seu merda!!! - Eu disse.  
+Eu estava tentando ser sofisticado, citando Heidegger, e você me vem com essa coisa simplória, filosofia de Praia Grande? Seu merda!!! - Eu disse.
 
 Ele calado, como quem espera a próxima oportunidade de me sacanear...
 
 
 
-É.  
+É.
 
 É difícil ser sério.
 
