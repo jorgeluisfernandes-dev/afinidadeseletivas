@@ -4,9 +4,9 @@ title = "Visita ao Inconsciente"
 
 date = "2009-02-11"
 
-category = "PoetasAfins"
+category = "PoesiasEletivas"
 
-tags = \["inconsciente", "psicologia", "humor", "autoconhecimento"]
+tags = ["inconsciente", "psicologia", "humor", "autoconhecimento"]
 
 kind = "poetry"
 
@@ -43,8 +43,3 @@ Ele calado, como quem espera a próxima oportunidade de me sacanear...
 É.
 
 É difícil ser sério.
-
-
-
-11/02/2009
-

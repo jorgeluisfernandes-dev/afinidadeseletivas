@@ -4,9 +4,9 @@ title = "O conhecimento do Amor"
 
 date = "2009-02-21"
 
-category = "PoetasAfins"
+category = "PoesiasEletivas"
 
-tags = \["amor", "cristianismo", "espiritualidade", "fé"]
+tags = ["amor", "cristianismo", "espiritualidade", "fé"]
 
 kind = "poetry"
 
@@ -93,8 +93,3 @@ Então, que doença maravilhosa que cura o doente.
 Não, a migalha do Amor de Cristo é remédio.
 
 É água que aplaca a sede eternamente...
-
-
-
-21/02/2009
-

@@ -4,9 +4,9 @@ title = "Manoel Ricardo de Lima"
 
 date = "2009-02-12"
 
-category = "PoetasAfins"
+category = "PoesiasEletivas"
 
-tags = \["poesia", "amizade", "Goethe", "homenagem"]
+tags = ["poesia", "amizade", "Goethe", "homenagem"]
 
 kind = "poetry"
 
@@ -43,8 +43,3 @@ Par délicatesse...
 
 
 Entanto lutamos mal rompe a manhã.
-
-
-
-12/02/2009
-
