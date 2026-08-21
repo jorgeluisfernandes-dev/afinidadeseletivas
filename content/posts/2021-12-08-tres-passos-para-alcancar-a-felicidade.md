@@ -1,7 +1,7 @@
 +++
 title = "Três passos para alcançar a felicidade"
 date = "2021-12-08"
-category = "Crónica"
+category = "Crônica"
 tags = ["filosofia", "consciência", "evolução", "espiritualidade", "linguagem"]
 kind = "prose"
 summary = "Reflexões sobre os três estágios da vida: animal, consciente e espiritual, e o caminho para a pureza da consciência."
