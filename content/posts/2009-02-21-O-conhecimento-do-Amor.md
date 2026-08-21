@@ -4,7 +4,7 @@ title = "O conhecimento do Amor"
 
 date = "2009-02-21"
 
-category = "poesiasafins"
+category = "PoetasAfins"
 
 tags = \["amor", "cristianismo", "espiritualidade", "fé"]
 

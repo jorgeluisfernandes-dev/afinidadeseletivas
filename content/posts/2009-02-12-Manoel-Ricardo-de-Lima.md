@@ -4,7 +4,7 @@ title = "Manoel Ricardo de Lima"
 
 date = "2009-02-12"
 
-category = "poesiasafins"
+category = "PoetasAfins"
 
 tags = \["poesia", "amizade", "Goethe", "homenagem"]
 

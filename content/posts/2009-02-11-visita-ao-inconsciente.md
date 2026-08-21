@@ -4,7 +4,7 @@ title = "Visita ao Inconsciente"
 
 date = "2009-02-11"
 
-category = "poesiasafins"
+category = "PoetasAfins"
 
 tags = \["inconsciente", "psicologia", "humor", "autoconhecimento"]
 
