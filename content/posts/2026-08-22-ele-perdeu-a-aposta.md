@@ -9,8 +9,8 @@ summary = "Poema sobre uma aposta perdida, entre o cinismo e o desespero."
 
 <div style="text-align: center;">
 
-*(os guizos de Blok)*
-
+(os guizos de Blok)<br>
+<br>
 ele perdeu a aposta<br>
 foi a piedade?<br>
 duas doses de cachaca de graca no almoco<br>
