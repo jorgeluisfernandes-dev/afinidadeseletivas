@@ -1,7 +1,7 @@
 +++
 title = "asas do grifo abertas em cruz"
-date = "2026-08-22"
-pinned = true
+date = "2026-08-23"
+pinned = false
 category = "PoesiasEletivas"
 tags = ["Brasão", "Mensagem", "Sarney", "Maranhao"]
 kind = "poetry"
