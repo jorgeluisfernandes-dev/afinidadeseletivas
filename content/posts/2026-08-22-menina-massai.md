@@ -1,16 +1,30 @@
 +++
 title = "menina massai"
 date = "2026-08-22"
+pinned = true
 category = "PoesiasEletivas"
-tags = []
+tags = ["bastardo", "poesia", "maranhão"]
 kind = "poetry"
 summary = ""
 +++
+<div style="text-align: center;">
 
-menina massai
-nao me pode doer se ela tropeca pes de garca
-peso de ausencias vazios asma
-toda brisa
-tropeca e garca no amplo vazio
-sozinha na cozinha que eh
-quarto e banheiro e abandono
+
+menina massai<br>
+nao me pode doer<br>
+se ela tropeca<br>
+pes de garca<br>
+peso de ausencias<br>
+vazios<br>
+asma<br>
+toda brisa<br>
+tropeca e garca<br>
+no amplo vazio<br>
+sozinha na cozinha<br>
+que eh quarto e banheiro<br>
+e abandono<br>
+
+
+</div>
+
+
