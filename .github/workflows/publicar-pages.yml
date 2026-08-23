@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Baixar repositorio
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Preparar Python
         uses: actions/setup-python@v6
@@ -38,6 +40,9 @@ jobs:
 
       - name: Aplicar decisões editoriais históricas
         run: python tools/apply_editorial_overrides.py
+
+      - name: Atualizar mensagens recentes e fixadas
+        run: python tools/update_recent_sidebar.py
 
       - name: Inserir Cloudflare Web Analytics
         run: python tools/inject_cloudflare_analytics.py
