@@ -1,5 +1,5 @@
 +++
-title = "Da cabeca degolada"
+title = "da cabeca degolada"
 date = "2026-08-21"
 category = "PoesiasEletivas"
 tags = ["Rilke", "transdactilo", "bastardo", "poesia", "maranhão"]
