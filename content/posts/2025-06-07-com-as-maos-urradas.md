@@ -8,20 +8,16 @@ kind = "poetry"
 +++
 
 
-
-
-com as maos urradas<br>
-<br>
-escreve<br>
-o proprio nome na areia<br>
-iambico<br>
-iatrico<br>
-o sangue pulsa sobre as velhas visceras<br>
-o bisturi irado<br>
-rasgando veias<br>
-pondo a nu<br>
-a merda dura<br>
-que lhe funda o ser<br>
-tao cirurgico<br>
-quanto remover<br>
-verme<br>
+escreve
+o proprio nome na areia
+iambico
+iatrico
+o sangue pulsa sobre as velhas visceras
+o bisturi irado
+rasgando veias
+pondo a nu
+a merda dura
+que lhe funda o ser
+tao cirurgico
+quanto remover
+verme
