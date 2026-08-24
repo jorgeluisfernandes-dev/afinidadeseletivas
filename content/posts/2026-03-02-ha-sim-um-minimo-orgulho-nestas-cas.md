@@ -1,4 +1,3 @@
-
 +++
 title = "ha, sim, um minimo orgulho nestas cas"
 date = "2026-03-02"
@@ -7,7 +6,6 @@ category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]
 kind = "poetry"
 +++
-
 
 
 (que saberao a verme ou a cinza)
