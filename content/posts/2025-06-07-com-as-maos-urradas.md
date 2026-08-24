@@ -1,7 +1,7 @@
 +++
 title = "com as maos urradas"
 date = "2025-06-07"
-pinned = true
+pinned = false
 category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]
 kind = "poetry"
