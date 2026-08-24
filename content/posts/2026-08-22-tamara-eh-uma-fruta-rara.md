@@ -7,6 +7,13 @@ kind = "poetry"
 summary = ""
 +++
 
-tamara eh uma fruta rara
-como virgem que envelhece cava a mao completa
-seu sabor de primavera
+<div style="text-align: center;">
+
+
+tamara eh uma fruta rara<br>
+como virgem que envelhece<br>
+cava a mao completa<br>
+seu sabor de primavera<br>
+
+</div>
+

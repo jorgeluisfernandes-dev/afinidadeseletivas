@@ -7,5 +7,13 @@ kind = "poetry"
 summary = ""
 +++
 
-sol claro no vale
-aquece o que nao se esquece antes que o dia salte
+<div style="text-align: center;">
+
+
+sol claro no vale<br>
+aquece o que nao se esquece<br>
+antes que o dia salte<br>
+
+
+</div>
+

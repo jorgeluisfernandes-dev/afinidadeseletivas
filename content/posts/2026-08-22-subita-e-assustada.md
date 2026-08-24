@@ -7,5 +7,14 @@ kind = "poetry"
 summary = ""
 +++
 
-subita e assustada
-a estrelinha veio me ver na noite nublada
+<div style="text-align: center;">
+
+
+subita e assustada<br>
+a estrelinha veio me ver<br> 
+na noite nublada<br>
+
+
+</div>
+
+

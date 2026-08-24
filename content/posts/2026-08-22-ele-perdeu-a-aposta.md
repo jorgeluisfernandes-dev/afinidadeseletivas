@@ -18,6 +18,7 @@ e a iris rutilante<br>
 <br>
 tao moco!<br>
 que moco era?<br>
+o filho da puta de sua mae<br>
 <br>
 foi piedade?<br>
 punheta<br>

@@ -7,5 +7,14 @@ kind = "poetry"
 summary = ""
 +++
 
-simio sobre a agua
-sopesa o prumo do vento a vida eh uma valsa
+
+<div style="text-align: center;">
+
+
+simio sobre a agua<br>
+sopesa o prumo do vento<br>
+a vida eh uma valsa<br>
+
+</div>
+
+
