@@ -37,8 +37,6 @@ um dervixe de paleto e gravata
 acumulando dias
 cifras e nadas
 
-
-
 como
 
 um esquizo-paranoide
@@ -48,8 +46,6 @@ a quem cortaram o pau na infancia
 cujo delirio-Bispo-do-Rosario
 
 tenta a fuga-hiena
-
-
 
 ou
 
