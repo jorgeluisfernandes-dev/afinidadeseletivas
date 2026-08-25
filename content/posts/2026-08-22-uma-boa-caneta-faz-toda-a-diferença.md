@@ -3,9 +3,10 @@ title = "uma boa caneta faz toda a diferença"
 date = "2026-08-22"
 pinned = false
 category = "PoesiasEletivas"
-tags = ["bastardo", "poesia", "maranhão"]
+tags = \["bastardo", "poesia", "maranhão"]
 kind = "poetry"
 +++
+
 
 
 uma gota de opio tambem
@@ -35,4 +36,36 @@ um crente
 um dervixe de paleto e gravata
 acumulando dias
 cifras e nadas
+
+
+
+como
+
+um esquizo-paranoide
+
+a quem cortaram o pau na infancia
+
+cujo delirio-Bispo-do-Rosario
+
+tenta a fuga-hiena
+
+
+
+ou
+
+como
+
+um poeta que escapou ao Inferno
+
+porque a beleza eh um doce antidoto
+
+e so volta para
+
+busca-la e
+
+servi-la a mesa dos famintos
+
+repasto da hiena morta
+
+em postas
 
