@@ -3,7 +3,7 @@ title = "uma boa caneta faz toda a diferença"
 date = "2026-08-22"
 pinned = false
 category = "PoesiasEletivas"
-tags = \["bastardo", "poesia", "maranhão"]
+tags = ["bastardo", "poesia", "maranhão"]
 kind = "poetry"
 +++
 
