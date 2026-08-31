@@ -12,7 +12,7 @@ pinned = true
 
 
 
-Da cabeça degolada<br>
+da cabeça degolada<br>
 ha a iris inaudita<br>
 e rijo e altivo<br>
 o torso, heraldico<br>
