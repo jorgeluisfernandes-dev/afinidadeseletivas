@@ -2,19 +2,16 @@
 title = "simio sobre a agua"
 date = "2026-08-22"
 category = "PoesiasEletivas"
-tags = []
+tags = ["bastardo", "poesia", "maranhão"]
 kind = "poetry"
 summary = ""
 +++
 
 
-<div style="text-align: center;">
 
+simio sobre a agua
+sopesa o prumo do vento
+a vida eh uma valsa
 
-simio sobre a agua<br>
-sopesa o prumo do vento<br>
-a vida eh uma valsa<br>
-
-</div>
 
 
