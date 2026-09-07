@@ -9,11 +9,15 @@ kind = "poetry"
 
 
 eu tomo
-postas partes 
-faca fina cheiro de sangue 
+postas 
+partes 
+faca fina 
+cheiro de sangue 
 urina
 visceras 
 asso gourmet 
 carbonario
+
 caralho
+
 a ave boi nao esta mais la
