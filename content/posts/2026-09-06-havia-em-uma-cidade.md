@@ -1,3 +1,12 @@
++++
+title = "shavia em uma cidade"
+date = "2026-09-26"
+pinned = false
+category = "PoesiasEletivas"
+tags = ["bastardo", "poesia", "maranhão"]
+kind = "poetry"
++++
+
 com ardor de floresta 
 certo poeta timido e pobre 
 roupa para o dia 
