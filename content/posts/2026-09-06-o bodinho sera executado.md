@@ -1,6 +1,6 @@
 ++
 title = "o bodinho sera executado"
-date = "2026-08-22"
+date = "2026-09-06"
 pinned = false
 category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]
@@ -28,4 +28,3 @@ o gato caminha no telhado, cantando sua litania
 - meu, meu, meu...
 
 o sangue do justo para a gloria do eterno
-
