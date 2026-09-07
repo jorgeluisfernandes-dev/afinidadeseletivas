@@ -1,5 +1,5 @@
 +++
-title = "shavia em uma cidade"
+title = "havia em uma cidade"
 date = "2026-09-26"
 pinned = false
 category = "PoesiasEletivas"
@@ -32,7 +32,7 @@ em risos de sal e espuma
 rindo o riso do tempo perdido 
 a beleza breve do medo
 habitava uma margem oposta 
-onde vicam os valentes
+onde vincam os valentes
 e respirava entre meninos 
 panteros
 com seus brincos de pirata 
