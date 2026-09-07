@@ -1,3 +1,12 @@
++++
+title = "arte poetica"
+date = "2026-09-26"
+pinned = false
+category = "PoesiasEletivas"
+tags = ["bastardo", "poesia", "Borges"]
+kind = "poetry"
++++
+
 Mirar el río hecho de tiempo y agua 
 y recordar que el tiempo es otro río, 
 saber que nos perdemos como el río 
