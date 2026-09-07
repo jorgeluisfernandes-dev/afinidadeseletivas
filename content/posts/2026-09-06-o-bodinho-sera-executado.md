@@ -25,6 +25,6 @@ e a fome de ontem se redimi numa manha vermelha
 
 o gato caminha no telhado, cantando sua litania
 
-- meu, meu, meu...
+    meu, meu, meu...
 
 o sangue do justo para a gloria do eterno
