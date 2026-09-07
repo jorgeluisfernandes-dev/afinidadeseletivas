@@ -6,13 +6,11 @@ tags = []
 kind = "poetry"
 summary = ""
 +++
-<div style="text-align: center;">
 
-varejeira em carne podre<br>
+varejeira em carne podre
 
-apenas faminta<br>
+apenas faminta
 
 bebe seu sumo de odio
 
 
-</div>
