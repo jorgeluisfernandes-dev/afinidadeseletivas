@@ -1,6 +1,6 @@
 +++
 title = "esposinha"
-date = "2026-08-22T21:59:00-03:00"
+date = "2026-08-17"
 pinned = false
 category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]

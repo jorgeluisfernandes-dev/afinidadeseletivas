@@ -1,6 +1,6 @@
 +++
 title = "o mito eh como uma saliva"
-date = "2026-08-22"
+date = "2026-09-09"
 pinned = false
 category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]
