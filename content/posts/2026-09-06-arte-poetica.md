@@ -1,6 +1,6 @@
 +++
 title = "arte poetica"
-date = "2026-09-25"
+date = "2026-09-11"
 pinned = false
 category = "PoetasAfins"
 tags = ["bastardo", "poesia", "Borges"]
