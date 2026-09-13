@@ -1,6 +1,6 @@
 +++
 title = "ciciando na praça batista campos"
-date = "2026-10-09"
+date = "2026-09-09"
 pinned = false
 category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]
