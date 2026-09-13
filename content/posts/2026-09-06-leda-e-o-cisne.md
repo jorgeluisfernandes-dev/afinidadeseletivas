@@ -1,6 +1,6 @@
 +++
 title = "leda e o cirne"
-date = "2026-09-12"
+date = "2026-09-11"
 pinned = false
 category = "PoesiasEletivas"
 tags = ["transdactilo", "poesia", "maranhão"]

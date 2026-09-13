@@ -1,6 +1,6 @@
 +++
 title = "se o bardo fosse meu pai"
-date = "2026-09-26"
+date = "2026-09-06"
 pinned = false
 category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]

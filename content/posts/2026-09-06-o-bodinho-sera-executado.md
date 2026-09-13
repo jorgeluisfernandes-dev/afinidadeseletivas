@@ -1,6 +1,6 @@
 +++
 title = "o bodinho sera executado"
-date = "2026-09-06"
+date = "2026-09-04"
 pinned = false
 category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]

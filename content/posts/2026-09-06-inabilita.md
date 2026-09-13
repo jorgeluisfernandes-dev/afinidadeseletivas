@@ -1,6 +1,6 @@
 +++
 title = "inabilita"
-date = "2026-08-18"
+date = "2026-08-22"
 pinned = false
 category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]

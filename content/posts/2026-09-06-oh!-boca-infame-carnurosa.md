@@ -1,6 +1,6 @@
 +++
 title = "oh-boca-infame-carnurosa"
-date = "2026-08-10"
+date = "2026-08-22"
 pinned = false
 category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]

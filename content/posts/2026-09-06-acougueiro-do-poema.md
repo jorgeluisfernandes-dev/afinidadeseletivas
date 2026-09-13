@@ -1,6 +1,6 @@
 +++
 title = "acougueiro do poema"
-date = "2026-10-09"
+date = "2026-10-07"
 pinned = false
 category = "PoesiasEletivas"
 tags = ["bastardo", "poesia", "maranhão"]
