@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
 POSTS_DIR = ROOT / "content" / "posts"
 PINNED_LIMIT = 3
-RECENT_LIMIT = 5
+RECENT_LIMIT = 10
 
 
 @dataclass
