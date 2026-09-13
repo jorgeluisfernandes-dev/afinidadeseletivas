@@ -83,7 +83,7 @@ def load_posts() -> list[SidebarPost]:
 def update_sidebar(posts: list[SidebarPost]) -> None:
     pinned = sorted(
         (p for p in posts if p.pinned),
-        key=lambda p: (p.posted_at, p.title.casefold()),
+        key=lambda p: (p.day, p.title.casefold()),
         reverse=True,
     )
     if len(pinned) > PINNED_LIMIT:
@@ -93,7 +93,7 @@ def update_sidebar(posts: list[SidebarPost]) -> None:
     pinned_paths = {p.relpath for p in pinned}
     recent = sorted(
         (p for p in posts if p.relpath not in pinned_paths),
-        key=lambda p: (p.posted_at, p.title.casefold()),
+        key=lambda p: (p.day, p.title.casefold()),
         reverse=True,
     )[:RECENT_LIMIT]
     selected = pinned + recent
