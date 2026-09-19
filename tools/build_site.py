@@ -37,11 +37,18 @@ CATEGORY_DIR = {
     "Poemas da Cabra": "poemas_da_cabra",
     "PoesiasEletivas": "poesiaseletivas",
     "PoetasAfins": "poetasafins",
+    "Afins_Ferreira Gullar": "afins_ferreira_gullar",
     "Projeto": "projeto",
     "Tese": "tese",
 }
 
-POETRY_CATEGORIES = {"Poemas da Cabra", "PoesiasEletivas", "PoetasAfins"}
+POETRY_CATEGORIES = {"Poemas da Cabra", "PoesiasEletivas", "PoetasAfins", "Afins_Ferreira Gullar"}
+CATEGORY_DESCRIPTIONS = {
+    "Afins_Ferreira Gullar": (
+        "Seleção aberta de poemas de Ferreira Gullar: uma curadoria crítica "
+        "e afetiva, preparada para receber novas escolhas."
+    ),
+}
 SKIP_TOP = {".git", ".github", "content", "templates", "tools", "_site"}
 SKIP_FILES = {"requirements.txt", "NOVAS_PUBLICACOES.md", "README.md"}
 MONTHS = {
@@ -297,6 +304,33 @@ def update_category_pages(posts: list[Post]) -> None:
         by_cat.setdefault(p.category, []).append(p)
     for category, items in by_cat.items():
         path = OUT / CATEGORY_DIR[category] / "index.html"
+        if not path.exists():
+            sample = OUT / "poetasafins" / "index.html"
+            soup = soup_file(sample)
+            if soup.title:
+                soup.title.string = f"{category} — AfinidadeSeletivas"
+            description = soup.find("meta", attrs={"name": "description"})
+            if description:
+                description["content"] = CATEGORY_DESCRIPTIONS.get(
+                    category, "Textos reunidos nesta categoria."
+                )
+            title = soup.select_one(".page-title")
+            if title:
+                title.string = category
+            deck = soup.select_one(".page-deck")
+            if deck:
+                deck.clear()
+                deck.append(CATEGORY_DESCRIPTIONS.get(category, "Textos reunidos nesta categoria."))
+                deck.append(" ")
+                count = soup.new_tag("span")
+                count["class"] = ["small"]
+                count.string = "0 texto(s) no acervo."
+                deck.append(count)
+            content = soup.select_one("main .content")
+            if content:
+                for card in list(content.find_all("article", class_="post-card", recursive=False)):
+                    card.decompose()
+            write_soup(path, soup)
         soup = soup_file(path)
         content = soup.select_one("main .content")
         first_card = content.find("article", class_="post-card", recursive=False)
@@ -506,12 +540,23 @@ def update_global_counts_and_archive_sidebar() -> None:
                 continue
             title = h.get_text(" ", strip=True)
             if title == "Categorias":
-                for li in box.select("ul > li"):
-                    a = li.find("a")
-                    span = li.find("span", class_="small")
-                    if a and span and a.get_text(" ", strip=True) in cat_counts:
-                        span.string = f"({cat_counts[a.get_text(' ', strip=True)]})"
-                        changed = True
+                ul = box.find("ul")
+                if ul:
+                    ul.clear()
+                    rel = os.path.relpath(OUT, path.parent).replace("\\", "/")
+                    prefix = "" if rel == "." else rel.rstrip("/") + "/"
+                    for category, directory in CATEGORY_DIR.items():
+                        li = soup.new_tag("li")
+                        a = soup.new_tag("a", href=f"{prefix}{directory}/index.html")
+                        a.string = category
+                        span = soup.new_tag("span")
+                        span["class"] = ["small"]
+                        span.string = f"({cat_counts[category]})"
+                        li.append(a)
+                        li.append(" ")
+                        li.append(span)
+                        ul.append(li)
+                    changed = True
             elif title == "Arquivo":
                 content = box.select_one(".boxcontent")
                 if content:
@@ -529,6 +574,35 @@ def update_global_counts_and_archive_sidebar() -> None:
 
         # Contadores dos Caminhos de leitura da página inicial.
         if path == OUT / "index.html":
+            holder = soup.select_one(".reading-paths")
+            if holder and not any(
+                a.get_text(" ", strip=True) == "Afins_Ferreira Gullar"
+                for a in holder.select(".reading-path h3 a")
+            ):
+                card = soup.new_tag("div")
+                card["class"] = ["reading-path"]
+                h3 = soup.new_tag("h3")
+                a = soup.new_tag("a", href="afins_ferreira_gullar/index.html")
+                a.string = "Afins_Ferreira Gullar"
+                h3.append(a)
+                h3.append(" ")
+                count = soup.new_tag("span")
+                count["class"] = ["small"]
+                count.string = f"({cat_counts['Afins_Ferreira Gullar']})"
+                h3.append(count)
+                card.append(h3)
+                desc = soup.new_tag("p")
+                desc.string = CATEGORY_DESCRIPTIONS["Afins_Ferreira Gullar"]
+                card.append(desc)
+                anchor = next((
+                    x for x in holder.select(".reading-path")
+                    if x.find("a") and x.find("a").get_text(" ", strip=True) == "PoetasAfins"
+                ), None)
+                if anchor:
+                    anchor.insert_after(card)
+                else:
+                    holder.append(card)
+                changed = True
             for card in soup.select(".reading-path"):
                 a = card.find("a")
                 span = card.find("span", class_="small")
