@@ -24,6 +24,7 @@ As categorias aceitas são:
 - Poemas da Cabra
 - PoesiasEletivas
 - PoetasAfins
+- Afins_Ferreira Gullar
 - Projeto
 - Tese
 

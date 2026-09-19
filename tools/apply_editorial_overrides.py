@@ -18,6 +18,7 @@ CATEGORY_DIR = {
     "Poemas da Cabra": "poemas_da_cabra",
     "PoesiasEletivas": "poesiaseletivas",
     "PoetasAfins": "poetasafins",
+    "Afins_Ferreira Gullar": "afins_ferreira_gullar",
     "Projeto": "projeto",
     "Tese": "tese",
 }
