@@ -5,24 +5,10 @@ import re
 from pathlib import Path
 
 from bs4 import BeautifulSoup, Tag
+from build_site import CATEGORY_DIR
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
-
-CATEGORY_DIR = {
-    "BlogsFeras": "blogsferas",
-    "Conto": "conto",
-    "Crônica": "cronica",
-    "Humor": "humor",
-    "Musica": "musica",
-    "Poemas da Cabra": "poemas_da_cabra",
-    "PoesiasEletivas": "poesiaseletivas",
-    "PoetasAfins": "poetasafins",
-    "Afins_Ferreira Gullar": "afins_ferreira_gullar",
-    "Projeto": "projeto",
-    "Tese": "tese",
-}
-
 
 def soup_file(path: Path) -> BeautifulSoup:
     return BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
@@ -99,6 +85,78 @@ def reclassify_provocacao() -> None:
         change_deck_count(conto, +1)
     write_soup(tese_path, tese)
     write_soup(conto_path, conto)
+
+
+POETAS_AFINS_RECLASSIFICATIONS = {
+    "archive/2007/08/26/amor-pois-que-e-palavra-essencial.html": "Afins_Carlos Drummond de Andrade",
+    "archive/2006/09/21/a-maquina-do-mundo.html": "Afins_Carlos Drummond de Andrade",
+    "archive/2006/09/29/pedra-negra-sobre-pedra-branca.html": "Afins_César Vallejo",
+    "archive/2007/04/26/dois-poemas-de-lorca.html": "Afins_Federico García Lorca",
+    "archive/2007/09/11/o-menino-da-sua-mae.html": "Afins_Fernando Pessoa",
+    "archive/2007/09/08/aos-emudecidos.html": "Afins_Georg Trakl",
+    "archive/2007/03/26/destino-do-poeta.html": "Afins_Octavio Paz",
+    "archive/2006/08/23/a-pantera.html": "Afins_Rainer Maria Rilke",
+    "archive/2006/09/12/recusa.html": "Afins_Velimir Khlebnikov",
+    "archive/2006/08/29/leda-e-o-cisne.html": "Afins_William Butler Yeats",
+}
+
+
+def reclassify_historical_poets() -> None:
+    """Move os poemas identificados sem alterar seus URLs históricos."""
+    archive_path = OUT / "arquivo" / "index.html"
+    archive = soup_file(archive_path)
+    source_path = OUT / CATEGORY_DIR["PoetasAfins"] / "index.html"
+    source = soup_file(source_path)
+    destinations: dict[str, BeautifulSoup] = {}
+    moved = 0
+
+    for rel, category in POETAS_AFINS_RECLASSIFICATIONS.items():
+        page = OUT / rel
+        if not page.exists():
+            raise RuntimeError(f"Página histórica não encontrada: {rel}")
+        directory = CATEGORY_DIR[category]
+        soup = soup_file(page)
+        body = soup.body
+        classes = [c for c in (body.get("class") or []) if c != "poem-poetasafins"]
+        target_class = f"poem-{directory}"
+        if target_class not in classes:
+            classes.append(target_class)
+        body["class"] = classes
+        for a in (soup.select_one(".posted a"), soup.select_one(".post-navigation .category a")):
+            if a:
+                a.string = category
+                a["href"] = f"../../../../{directory}/index.html"
+        write_soup(page, soup)
+
+        link = archive.find("a", href="../" + rel)
+        if link:
+            li = link.find_parent("li")
+            label = li.find("span", class_="small") if li else None
+            if label:
+                label.string = f"[{category}]"
+
+        old_link = source.find("a", href="../" + rel)
+        card = old_link.find_parent("article", class_="post-card") if old_link else None
+        dest = destinations.setdefault(category, soup_file(OUT / directory / "index.html"))
+        already = dest.find("a", href="../" + rel)
+        if card and not already:
+            card_html = str(card)
+            card.decompose()
+            dest_card = BeautifulSoup(card_html, "html.parser").find("article")
+            content = dest.select_one("main .content")
+            first = content.find("article", class_="post-card", recursive=False) if content else None
+            if first:
+                first.insert_before(dest_card)
+            elif content:
+                content.append(dest_card)
+            change_deck_count(dest, +1)
+            moved += 1
+
+    change_deck_count(source, -moved)
+    write_soup(source_path, source)
+    write_soup(archive_path, archive)
+    for category, soup in destinations.items():
+        write_soup(OUT / CATEGORY_DIR[category] / "index.html", soup)
 
 
 def rebuild_category_sidebar_counts() -> None:
@@ -203,9 +261,10 @@ def main() -> int:
     if not OUT.exists():
         raise SystemExit("ERRO: _site não existe. Execute tools/build_site.py primeiro.")
     reclassify_provocacao()
+    reclassify_historical_poets()
     expand_emmanuel()
     rebuild_category_sidebar_counts()
-    print("Decisões editoriais aplicadas: Provocação→Conto; Emmanuel revisado/ampliado.")
+    print("Decisões editoriais aplicadas: Provocação→Conto; 10 poemas históricos reclassificados; Emmanuel revisado/ampliado.")
     return 0
 
 

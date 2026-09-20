@@ -28,6 +28,42 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
 BASE_URL = "https://jorgeluisfernandes-dev.github.io/afinidadeseletivas/"
 
+AFINS_AUTHOR_SLUGS = {
+    "Afins_Carlos Drummond de Andrade": "afins_carlos_drummond_de_andrade",
+    "Afins_César Vallejo": "afins_cesar_vallejo",
+    "Afins_Dylan Thomas": "afins_dylan_thomas",
+    "Afins_E. E. Cummings": "afins_e_e_cummings",
+    "Afins_Edmond Jabès": "afins_edmond_jabes",
+    "Afins_Eugenio Montale": "afins_eugenio_montale",
+    "Afins_Ezra Pound": "afins_ezra_pound",
+    "Afins_Federico García Lorca": "afins_federico_garcia_lorca",
+    "Afins_Fernando Pessoa": "afins_fernando_pessoa",
+    "Afins_Francis Ponge": "afins_francis_ponge",
+    "Afins_Georg Trakl": "afins_georg_trakl",
+    "Afins_Herberto Helder": "afins_herberto_helder",
+    "Afins_Jacques Roubaud": "afins_jacques_roubaud",
+    "Afins_José Lezama Lima": "afins_jose_lezama_lima",
+    "Afins_Laura Riding": "afins_laura_riding",
+    "Afins_Lawrence Ferlinghetti": "afins_lawrence_ferlinghetti",
+    "Afins_Marina Tsvetaeva": "afins_marina_tsvetaeva",
+    "Afins_Octavio Paz": "afins_octavio_paz",
+    "Afins_Paul Celan": "afins_paul_celan",
+    "Afins_Paul Valéry": "afins_paul_valery",
+    "Afins_Paul Van Ostaijen": "afins_paul_van_ostaijen",
+    "Afins_Rainer Maria Rilke": "afins_rainer_maria_rilke",
+    "Afins_Robert Creeley": "afins_robert_creeley",
+    "Afins_Sebastião Alba": "afins_sebastiao_alba",
+    "Afins_Sylvia Plath": "afins_sylvia_plath",
+    "Afins_T. S. Eliot": "afins_t_s_eliot",
+    "Afins_Vasko Popa": "afins_vasko_popa",
+    "Afins_Velimir Khlebnikov": "afins_velimir_khlebnikov",
+    "Afins_Vladimir Maiakóvski": "afins_vladimir_maiakovski",
+    "Afins_Wallace Stevens": "afins_wallace_stevens",
+    "Afins_William Butler Yeats": "afins_william_butler_yeats",
+    "Afins_William Carlos Williams": "afins_william_carlos_williams",
+    "Afins_Yves Bonnefoy": "afins_yves_bonnefoy",
+}
+
 CATEGORY_DIR = {
     "BlogsFeras": "blogsferas",
     "Conto": "conto",
@@ -38,16 +74,21 @@ CATEGORY_DIR = {
     "PoesiasEletivas": "poesiaseletivas",
     "PoetasAfins": "poetasafins",
     "Afins_Ferreira Gullar": "afins_ferreira_gullar",
+    **AFINS_AUTHOR_SLUGS,
     "Projeto": "projeto",
     "Tese": "tese",
 }
 
-POETRY_CATEGORIES = {"Poemas da Cabra", "PoesiasEletivas", "PoetasAfins", "Afins_Ferreira Gullar"}
+POETRY_CATEGORIES = {"Poemas da Cabra", "PoesiasEletivas", "PoetasAfins", "Afins_Ferreira Gullar", *AFINS_AUTHOR_SLUGS}
 CATEGORY_DESCRIPTIONS = {
     "Afins_Ferreira Gullar": (
         "Seleção aberta de poemas de Ferreira Gullar: uma curadoria crítica "
         "e afetiva, preparada para receber novas escolhas."
     ),
+    **{
+        category: f"Seleção aberta de poemas de {category.removeprefix('Afins_')}."
+        for category in AFINS_AUTHOR_SLUGS
+    },
 }
 SKIP_TOP = {".git", ".github", "content", "templates", "tools", "_site"}
 SKIP_FILES = {"requirements.txt", "NOVAS_PUBLICACOES.md", "README.md"}

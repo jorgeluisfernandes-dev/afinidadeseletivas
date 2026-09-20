@@ -25,13 +25,24 @@ As categorias aceitas são:
 - PoesiasEletivas
 - PoetasAfins
 - Afins_Ferreira Gullar
+- Afins_Carlos Drummond de Andrade, Afins_César Vallejo, Afins_Dylan Thomas
+- Afins_E. E. Cummings, Afins_Edmond Jabès, Afins_Eugenio Montale, Afins_Ezra Pound
+- Afins_Federico García Lorca, Afins_Fernando Pessoa, Afins_Francis Ponge
+- Afins_Georg Trakl, Afins_Herberto Helder, Afins_Jacques Roubaud, Afins_José Lezama Lima
+- Afins_Laura Riding, Afins_Lawrence Ferlinghetti, Afins_Marina Tsvetaeva, Afins_Octavio Paz
+- Afins_Paul Celan, Afins_Paul Valéry, Afins_Paul Van Ostaijen
+- Afins_Rainer Maria Rilke, Afins_Robert Creeley, Afins_Sebastião Alba, Afins_Sylvia Plath
+- Afins_T. S. Eliot, Afins_Vasko Popa, Afins_Velimir Khlebnikov, Afins_Vladimir Maiakóvski
+- Afins_Wallace Stevens, Afins_William Butler Yeats, Afins_William Carlos Williams, Afins_Yves Bonnefoy
 - Projeto
 - Tese
 
 `kind` pode ser `prose` ou `poetry`.
 
-## Neste momento
+## Coleções de poetas
 
-Não existe nenhum texto novo em `content/posts/`. Portanto esta branch contém somente a oficina de publicação, sem nova postagem.
+Cada poeta possui uma categoria própria no formato `Afins_Nome do Poeta`. Os poemas ficam em arquivos Markdown independentes dentro de `content/posts/`; o nome do autor também integra o `slug`, evitando colisões entre poemas homônimos.
 
-O workflow `validar-infra.yml` apenas monta e valida uma cópia do site. Ele NÃO publica no GitHub Pages.
+Para criar uma categoria de outro poeta, acrescente seu nome e diretório ao dicionário `AFINS_AUTHOR_SLUGS`, em `tools/build_site.py`, e use essa categoria no cabeçalho dos poemas.
+
+O workflow monta e valida o site em pull requests. A publicação no GitHub Pages ocorre somente depois que as alterações chegam à branch `main`.
