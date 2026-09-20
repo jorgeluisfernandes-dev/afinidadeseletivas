@@ -28,6 +28,17 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
 BASE_URL = "https://jorgeluisfernandes-dev.github.io/afinidadeseletivas/"
 
+CURATED_CURRENT_LINKS = [
+    ("Poesia Primata", "https://www.poesiaprimata.com/"),
+    ("Ermira Cultura", "https://ermiracultura.com.br/"),
+]
+REDIRECTS = {
+    PurePosixPath("archive/2009/12/31/obrigando-me-a-ler-rilke.html"): (
+        "../../../../afins_rainer_maria_rilke/index.html",
+        "https://afinidadeseletivas.com/afins_rainer_maria_rilke/index.html",
+    ),
+}
+
 AFINS_AUTHOR_SLUGS = {
     "Afins_Carlos Drummond de Andrade": "afins_carlos_drummond_de_andrade",
     "Afins_César Vallejo": "afins_cesar_vallejo",
@@ -452,6 +463,58 @@ def update_tags(posts: list[Post]) -> None:
                 write_soup(path, soup)
 
 
+
+def write_redirect_pages() -> None:
+    for relpath, (target, canonical) in REDIRECTS.items():
+        path = OUT / Path(str(relpath))
+        path.parent.mkdir(parents=True, exist_ok=True)
+        page = f"""<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0; url={html.escape(target, quote=True)}">
+<link rel="canonical" href="{html.escape(canonical, quote=True)}">
+<title>Rainer Maria Rilke — AfinidadeSeletivas</title>
+</head>
+<body>
+<p>Esta seleção foi reorganizada. <a href="{html.escape(target, quote=True)}">Acesse Afins_Rainer Maria Rilke</a>.</p>
+</body>
+</html>
+"""
+        path.write_text(page, encoding="utf-8")
+
+
+def update_curated_links() -> None:
+    for path in OUT.rglob("*.html"):
+        soup = soup_file(path)
+        current = None
+        for title in soup.select(".curated-box .link-group-title"):
+            if title.get_text(" ", strip=True) == "Afinidades atuais":
+                current = title.find_next_sibling("ul")
+                break
+        if not current:
+            continue
+
+        existing = {
+            a.get("href", "").rstrip("/")
+            for a in current.find_all("a", href=True)
+        }
+        changed = False
+        for label, url in CURATED_CURRENT_LINKS:
+            if url.rstrip("/") in existing:
+                continue
+            li = soup.new_tag("li")
+            a = soup.new_tag("a", href=url)
+            a["rel"] = ["noopener", "noreferrer"]
+            a["target"] = "_blank"
+            a.string = label
+            li.append(a)
+            current.append(li)
+            changed = True
+        if changed:
+            write_soup(path, soup)
+
+
 def update_recent_sidebar(posts: list[Post]) -> None:
     if not posts:
         return
@@ -729,12 +792,14 @@ def main() -> int:
     copy_public_site()
     for p in posts:
         make_post_page(p)
+    write_redirect_pages()
     update_home(posts)
     update_category_pages(posts)
     update_archive(posts)
     update_tags(posts)
     update_tags_index(posts)
     update_recent_sidebar(posts)
+    update_curated_links()
     update_new_post_navigation(posts)
     update_global_counts_and_archive_sidebar()
     generate_sitemap()
