@@ -1,0 +1,24 @@
++++
+title = "Não basta abrir a janela"
+slug = "fernando-pessoa-nao-basta-abrir-a-janela"
+author = "Fernando Pessoa"
+date = "2026-09-19"
+category = "Afins_Fernando Pessoa"
+tags = ["Fernando Pessoa", "poesia", "acervo O Poema"]
+kind = "poetry"
+summary = "Poema de Fernando Pessoa, recuperado do acervo O Poema."
+source_note = "fernando_pessoa/fernandopessoa_htm_0b4d821a46.md"
++++
+
+(Alberto Caeiro)
+Não basta
+abrir a janela
+Para ver os campos e o rio.
+Não é bastante não ser cego
+Para ver as árvores e as flores.
+É preciso também não ter filosofia nenhuma.
+Com filosofia não há árvores: há idéias apenas.
+Há só cada um de nós, como uma cave.
+Há só uma janela fechada, e todo o mundo lá fora;
+E um sonho do que se poderia ver se a janela se abrisse,
+Que nunca é o que se vê quando se abre a janela.
