@@ -41,6 +41,9 @@ jobs:
       - name: Aplicar decisões editoriais históricas
         run: python tools/apply_editorial_overrides.py
 
+      - name: Organizar navegação e índices
+        run: python tools/organize_navigation.py
+
       - name: Atualizar mensagens recentes e fixadas
         run: python tools/update_recent_sidebar.py
 
