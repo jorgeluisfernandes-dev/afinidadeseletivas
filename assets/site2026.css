@@ -411,6 +411,11 @@ a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .navtop a[aria-current="page"]{font-weight:bold;color:#111}
 .page-title{margin:0 0 8px;padding:0 0 7px;border-bottom:1px solid #222;font-size:20px;line-height:1.35;color:#111;text-align:left}
 .page-deck{margin:0 0 24px;color:#58636d;font-size:12.5px;line-height:1.65}
+.authors-link{margin:-12px 0 24px;font-size:14px;line-height:1.6}
+.authors-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.authors-list li{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:12px 0;border-bottom:1px dotted #c7d0d8;font-size:15px;line-height:1.4}
+.authors-list .small{flex:none;color:#65717b;font-size:12px}
+@media(max-width:620px){.authors-list{grid-template-columns:1fr}}
 .home-return{margin:0 0 25px;padding:0 0 18px;border-bottom:1px solid var(--rule)}
 .home-return .eyebrow{margin:0 0 5px;color:#68727c;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em}
 .home-return h2{margin:0 0 9px;font-size:20px;line-height:1.35}
