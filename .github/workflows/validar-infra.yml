@@ -32,6 +32,9 @@ jobs:
       - name: Aplicar decisões editoriais históricas
         run: python tools/apply_editorial_overrides.py
 
+      - name: Organizar navegação e índices
+        run: python tools/organize_navigation.py
+
       - name: Validar links e arquivos locais
         run: python tools/validate_site.py
 

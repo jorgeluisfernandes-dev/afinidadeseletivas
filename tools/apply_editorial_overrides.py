@@ -6,6 +6,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup, Tag
 from build_site import CATEGORY_DIR
+from organize_poets import organize_poets
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
@@ -262,9 +263,10 @@ def main() -> int:
         raise SystemExit("ERRO: _site não existe. Execute tools/build_site.py primeiro.")
     reclassify_provocacao()
     reclassify_historical_poets()
+    organize_poets()
     expand_emmanuel()
     rebuild_category_sidebar_counts()
-    print("Decisões editoriais aplicadas: Provocação→Conto; 10 poemas históricos reclassificados; Emmanuel revisado/ampliado.")
+    print("Decisões editoriais aplicadas: Provocação→Conto; 10 poemas históricos reclassificados; João Cabral e índice de autores organizados; Emmanuel revisado/ampliado.")
     return 0
 
 

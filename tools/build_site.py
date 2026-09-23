@@ -54,6 +54,7 @@ AFINS_AUTHOR_SLUGS = {
     "Afins_Herberto Helder": "afins_herberto_helder",
     "Afins_Jacques Roubaud": "afins_jacques_roubaud",
     "Afins_José Lezama Lima": "afins_jose_lezama_lima",
+    "Afins_João Cabral de Melo Neto": "afins_joao_cabral_de_melo_neto",
     "Afins_Laura Riding": "afins_laura_riding",
     "Afins_Lawrence Ferlinghetti": "afins_lawrence_ferlinghetti",
     "Afins_Marina Tsvetaeva": "afins_marina_tsvetaeva",
@@ -101,7 +102,7 @@ CATEGORY_DESCRIPTIONS = {
         for category in AFINS_AUTHOR_SLUGS
     },
 }
-SKIP_TOP = {".git", ".github", "content", "templates", "tools", "_site"}
+SKIP_TOP = {".git", ".github", ".venv", "content", "templates", "tools", "_site"}
 SKIP_FILES = {"requirements.txt", "NOVAS_PUBLICACOES.md", "README.md"}
 MONTHS = {
     1: "Janeiro", 2: "Fevereiro", 3: "Março", 4: "Abril", 5: "Maio", 6: "Junho",
@@ -163,6 +164,8 @@ def parse_post(path: Path) -> Post:
         raise ValueError(f"{path}: data inválida")
 
     category = str(meta["category"])
+    if category == "Poemas da Cabra":
+        raise ValueError(f"{path}: use Afins_João Cabral de Melo Neto para novos textos")
     if category not in CATEGORY_DIR:
         raise ValueError(f"{path}: categoria não reconhecida: {category}")
 
