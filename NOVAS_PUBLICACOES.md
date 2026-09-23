@@ -21,7 +21,6 @@ As categorias aceitas são:
 - Crônica
 - Humor
 - Musica
-- Poemas da Cabra
 - PoesiasEletivas
 - PoetasAfins
 - Afins_Ferreira Gullar
@@ -29,6 +28,7 @@ As categorias aceitas são:
 - Afins_E. E. Cummings, Afins_Edmond Jabès, Afins_Eugenio Montale, Afins_Ezra Pound
 - Afins_Federico García Lorca, Afins_Fernando Pessoa, Afins_Francis Ponge
 - Afins_Georg Trakl, Afins_Herberto Helder, Afins_Jacques Roubaud, Afins_José Lezama Lima
+- Afins_João Cabral de Melo Neto
 - Afins_Laura Riding, Afins_Lawrence Ferlinghetti, Afins_Marina Tsvetaeva, Afins_Octavio Paz
 - Afins_Paul Celan, Afins_Paul Valéry, Afins_Paul Van Ostaijen
 - Afins_Rainer Maria Rilke, Afins_Robert Creeley, Afins_Sebastião Alba, Afins_Sylvia Plath
@@ -41,7 +41,7 @@ As categorias aceitas são:
 
 ## Coleções de poetas
 
-Cada poeta possui uma categoria própria no formato `Afins_Nome do Poeta`. Os poemas ficam em arquivos Markdown independentes dentro de `content/posts/`; o nome do autor também integra o `slug`, evitando colisões entre poemas homônimos.
+Cada poeta pode ter uma coleção própria no formato `Afins_Nome do Poeta`. O índice público fica em `autores/index.html` e reúne as coleções disponíveis. Os poemas novos ficam em arquivos Markdown independentes dentro de `content/posts/`; o nome do autor também integra o `slug`, evitando colisões entre poemas homônimos. A antiga categoria `Poemas da Cabra` é mantida apenas como endereço histórico de entrada para a coleção de João Cabral.
 
 Para criar uma categoria de outro poeta, acrescente seu nome e diretório ao dicionário `AFINS_AUTHOR_SLUGS`, em `tools/build_site.py`, e use essa categoria no cabeçalho dos poemas.
 
