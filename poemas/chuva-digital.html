@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pequenina flor de Oliveira — AfinidadeSeletivas</title>
+<meta name="description" content="Um poema em chuva digital: os caracteres se reúnem em versos, tornam a se dispersar e voltam a se encontrar.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pequenina flor de Oliveira — poema em chuva digital">
+<meta property="og:description" content="Os versos emergem da chuva de caracteres, permanecem por um instante e se dissolvem novamente.">
+<style>
+  html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #000; }
+  canvas { display: block; width: 100%; height: 100%; }
+  #poema {
+    position: fixed; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+  #back {
+    position: fixed; top: calc(14px + env(safe-area-inset-top, 0px)); left: 18px;
+    color: #b5d6b9; font: 12px monospace; text-decoration: none;
+    opacity: .65; z-index: 2;
+  }
+  #back:hover, #back:focus-visible { opacity: 1; text-decoration: underline; }
+  #hint {
+    position: fixed; bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    left: 50%; width: max-content; max-width: calc(100% - 32px);
+    transform: translateX(-50%); color: #8bcf9b;
+    font: 12px monospace; letter-spacing: .04em; text-align: center;
+    opacity: .65; pointer-events: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    canvas, #hint { display: none; }
+    #poema {
+      position: fixed; inset: 0; box-sizing: border-box; width: 100%; height: 100%;
+      margin: 0; padding: 24px; display: grid; place-items: center;
+      overflow: auto; clip: auto; white-space: normal;
+      color: #e7f3e7; font: clamp(14px, 3.5vw, 21px)/1.55 monospace;
+    }
+    #poema p { margin: auto; }
+    #poema span { display: block; }
+  }
+</style>
+</head>
+<body>
+<canvas id="c" aria-hidden="true"></canvas>
+<a id="back" href="../index.html">← AfinidadeSeletivas</a>
+<main id="poema" aria-label="Poema Pequenina flor de Oliveira">
+  <p>
+    <span>Quem te viu, pequenina flor de Oliveira</span>
+    <span>amedrontada e obediente</span>
+    <span>servir a mesa dos escribas judeus</span>
+    <span>ainda assim silenciar diante do sinédrio o nome do pai</span>
+    <span>lactar faminta na escuridão de um estábulo</span>
+    <span>chorar quando teu filho bastardo sofria a maldição do Cherem</span>
+    <span>nem supunha que teu perfume emprenharia o mundo inteiro</span>
+    <span>nem supunha que teu branco leite alimentaria um cordeiro.</span>
+  </p>
+</main>
+<div id="hint" aria-hidden="true">toque / clique para reunir os versos</div>
+<script>
+(() => {
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  const poemLines = [...document.querySelectorAll('#poema span')].map(el => el.textContent.trim());
+  const alphabet = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const timings = { rain: 3500, gather: 4500, read: 17000, dissolve: 4800, interval: 3500 };
+  const duration = Object.values(timings).reduce((a, b) => a + b, 0);
+  const randomCode = () => alphabet[Math.floor(Math.random() * alphabet.length)];
+  const clamp = value => Math.max(0, Math.min(1, value));
+  const ease = value => 1 - Math.pow(1 - clamp(value), 3);
+  const mix = (a, b, t) => a + (b - a) * t;
+  let w = 0, h = 0, rain = [], letters = [], fontSize = 18;
+  let start = performance.now(), last = start;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function wrapLine(line, maxChars) {
+    const rows = [];
+    let row = '';
+    for (const word of line.split(/\s+/)) {
+      const candidate = row ? row + ' ' + word : word;
+      if (candidate.length > maxChars && row) {
+        rows.push(row);
+        row = word;
+      } else row = candidate;
+    }
+    if (row) rows.push(row);
+    return rows;
+  }
+
+  function layoutPoem() {
+    const availableWidth = Math.max(200, w - Math.max(32, w * .12));
+    const availableHeight = Math.max(180, h - Math.max(80, h * .18));
+    let rows = [], glyphWidth = 10, lineHeight = 26;
+    for (let size = Math.min(24, Math.max(15, w / 20)); size >= 12; size--) {
+      ctx.font = size + 'px monospace';
+      glyphWidth = ctx.measureText('M').width;
+      lineHeight = size * 1.48;
+      const maxChars = Math.max(12, Math.floor(availableWidth / glyphWidth));
+      rows = poemLines.flatMap(line => wrapLine(line, maxChars));
+      fontSize = size;
+      if (rows.length * lineHeight <= availableHeight) break;
+    }
+    letters = [];
+    const top = (h - rows.length * lineHeight) / 2;
+    rows.forEach((row, rowIndex) => {
+      const left = (w - row.length * glyphWidth) / 2;
+      [...row].forEach((char, index) => {
+        if (char === ' ') return;
+        letters.push({
+          char, x: left + (index + .5) * glyphWidth,
+          y: top + (rowIndex + .52) * lineHeight,
+          fromX: Math.random() * w, fromY: -30 - Math.random() * h * .9,
+          driftX: (Math.random() - .5) * Math.min(w * .6, 310),
+          driftY: h * (.22 + Math.random() * .7),
+          delay: Math.random() * .42, code: randomCode()
+        });
+      });
+    });
+  }
+
+  function resize() {
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = Math.round(w * ratio);
+    canvas.height = Math.round(h * ratio);
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    const spacing = w < 600 ? 19 : 23;
+    rain = Array.from({ length: Math.ceil(w / spacing) }, (_, i) => ({
+      x: i * spacing + spacing / 2,
+      y: Math.random() * (h + 300) - 150,
+      speed: 65 + Math.random() * 125,
+      length: 7 + Math.floor(Math.random() * 12),
+      seed: Math.random() * alphabet.length
+    }));
+    layoutPoem();
+  }
+
+  function paintRain(delta, strength) {
+    const step = w < 600 ? 17 : 19;
+    ctx.font = step + 'px monospace';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (const stream of rain) {
+      stream.y += stream.speed * delta / 1000;
+      if (stream.y - stream.length * step > h) stream.y = -Math.random() * h * .45;
+      for (let i = stream.length - 1; i >= 0; i--) {
+        const y = stream.y - i * step;
+        if (y < -step || y > h + step) continue;
+        const alpha = strength * (i === 0 ? .85 : .08 + .38 * (1 - i / stream.length));
+        ctx.fillStyle = i === 0
+          ? 'rgba(220,255,223,' + alpha + ')'
+          : 'rgba(42,230,79,' + alpha + ')';
+        const index = Math.floor(stream.seed + i * 11 + stream.y / (step * 2)) % alphabet.length;
+        ctx.fillText(alphabet[index], stream.x, y);
+      }
+    }
+  }
+
+  function paintPoem(phase, progress, now) {
+    ctx.font = fontSize + 'px monospace';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (const letter of letters) {
+      let x = letter.x, y = letter.y, opacity = 1, character = letter.char;
+      if (phase === 'gather') {
+        const p = ease((progress - letter.delay) / (1 - letter.delay));
+        x = mix(letter.fromX, letter.x, p);
+        y = mix(letter.fromY, letter.y, p);
+        opacity = .3 + .7 * p;
+        character = p > .78 ? letter.char : letter.code;
+      } else if (phase === 'dissolve') {
+        const p = clamp((progress - letter.delay * .3) / (1 - letter.delay * .3));
+        x += letter.driftX * p * p;
+        y += letter.driftY * p * p;
+        opacity = 1 - p;
+        character = p < .2 ? letter.char
+          : alphabet[Math.floor(now / 85 + letter.x + letter.y) % alphabet.length];
+      }
+      if (opacity <= 0) continue;
+      ctx.shadowColor = 'rgba(143,255,162,' + opacity * .6 + ')';
+      ctx.shadowBlur = 10;
+      ctx.fillStyle = 'rgba(234,248,233,' + opacity + ')';
+      ctx.fillText(character, x, y);
+    }
+    ctx.shadowBlur = 0;
+  }
+
+  function frame(now) {
+    const delta = Math.min(now - last, 80);
+    last = now;
+    const t = (now - start) % duration;
+    const gatherEnd = timings.rain + timings.gather;
+    const readEnd = gatherEnd + timings.read;
+    const dissolveEnd = readEnd + timings.dissolve;
+    let phase, progress = 0, strength = 1;
+    if (t < timings.rain) phase = 'rain';
+    else if (t < gatherEnd) {
+      phase = 'gather';
+      progress = (t - timings.rain) / timings.gather;
+      strength = mix(1, .24, ease(progress));
+    } else if (t < readEnd) {
+      phase = 'read'; strength = .24;
+    } else if (t < dissolveEnd) {
+      phase = 'dissolve';
+      progress = (t - readEnd) / timings.dissolve;
+      strength = mix(.24, 1, ease(progress));
+    } else phase = 'rain';
+
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, w, h);
+    paintRain(delta, strength);
+    if (phase === 'gather' || phase === 'read' || phase === 'dissolve')
+      paintPoem(phase, progress, now);
+    if (!reducedMotion.matches) requestAnimationFrame(frame);
+  }
+
+  canvas.addEventListener('pointerdown', () => {
+    start = performance.now() - timings.rain;
+  });
+  window.addEventListener('resize', resize);
+  reducedMotion.addEventListener('change', () => {
+    if (!reducedMotion.matches) {
+      last = performance.now(); start = last;
+      requestAnimationFrame(frame);
+    }
+  });
+  resize();
+  if (!reducedMotion.matches) requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
