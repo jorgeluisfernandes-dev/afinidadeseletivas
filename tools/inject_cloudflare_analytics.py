@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "_site"
 BEACON_URL = "https://static.cloudflareinsights.com/beacon.min.js"
-SITE_TOKEN = "22454232509144f3bb327ecb38fd03ff"
+SITE_TOKEN = "3604d01d09f94756b8d757ba73aa548d"
 SNIPPET = (
     "<!-- Cloudflare Web Analytics -->"
     "<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
