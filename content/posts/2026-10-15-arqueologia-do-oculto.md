@@ -8,7 +8,7 @@ draft = false
 +++
 
 
-pes que arqueia a terra e marcam o efemero
+pes que arqueiam a terra e marcam o efemero
 praia do abandono
 miriades, o infinito, balao vazio, grande olho ausente,
 imanta sonhos como uma dor
@@ -29,7 +29,7 @@ uma moça também, cuja altivez era toda espuma
 nao ha perda
 tudo pode ser carregado
 tudo pode ser fogo
-e a solidão, o infinito
+e a solidao, o infinito
 essa praia triste
 esse olho que prescruta ironico
 tudo serve para aquecer e iluminar o caminho
