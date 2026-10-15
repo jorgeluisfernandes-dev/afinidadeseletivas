@@ -1,4 +1,11 @@
-+++ title = "arqueologia do oculto" date = "2026-10-15" category = "PoesiasEletivas" tags = ["TerceiroBastardo", "poesia", "Maranhao"] kind = "poetry" summary = "x" +++
++++
+title = "Arqueologia do Oculto"
+date = 2026-10-15
+category = "PoesiasEletivas" 
+tags = ["TerceiroBastardo", "poesia", "Maranhao"] 
+kind = "poetry"
+draft = false
++++
 
 
 pes que arqueia a terra e marcam o efemero
