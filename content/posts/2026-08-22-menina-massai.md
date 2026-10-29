@@ -10,7 +10,6 @@ summary = ""
 <div style="text-align: center;">
 
 
-menina massai<br>
 nao me pode doer<br>
 se ela tropeca<br>
 pes de garca<br>
