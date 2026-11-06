@@ -1,11 +1,10 @@
----
-title: "A genialidade de Machado de Assis"
-date: 2026-11-03
-pinned = false
-category = "Projetos" 
-tags = ["Isaú e Jacó", "prosa", "Maranhao"] 
-status: publish
----
++++
+title = "A genialidade de Machado de Assis"
+date = 2026-11-03
+category = "Projeto"
+tags = ["Isaú e Jacó", "prosa", "Maranhao"]
+kind = "prose"
++++
 
 # A genialidade de Machado de Assis
 
