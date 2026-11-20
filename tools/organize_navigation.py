@@ -275,8 +275,8 @@ def navigation() -> None:
             groups = [
                 ("Obra", "obra", [(name, directory, counts.get(key, "")) for name, directory, key in [
                     ("PoesiasEletivas", "poesiaseletivas", "PoesiasEletivas"), ("Contos", "conto", "Conto"),
-                    ("Crônicas", "cronica", "Crônica"), ("Ensaios", "tese", "Tese"),
-                    ("Projetos", "projeto", "Projeto"), ("Humor", "humor", "Humor"), ("Música", "musica", "Musica")]]),
+                    ("Crônicas", "cronica", "Crônica"), ("Ensaios", "tese", "Ensaios"),
+                    ("Projetos", "projeto", "Projetos"), ("Humor", "humor", "Humor"), ("Música", "musica", "Musica")]]),
                 ("Afinidades", "afinidades", [("Poetas Afins", "poetasafins", counts.get("PoetasAfins", "")),
                     ("Leituras", "leituras", ""), ("Blogsfera", "blogsferas", counts.get("BlogsFeras", ""))]),
                 ("Índices", "indices", [("Autores", "autores", counts.get("Autores", "")),
