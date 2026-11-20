@@ -1,7 +1,6 @@
 """Uniformiza categorias exibidas, sem mudar arquivos, URLs ou o texto literario."""
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -22,12 +21,15 @@ def normalize_page(path: Path) -> bool:
     # Metadados de artigos e resumos; nunca substitui palavras no corpo da obra.
     for element in soup.select(".post-context, .post-card .meta"):
         previous = element.get_text(" ", strip=True)
-        match = re.search(r"(?<!\\w)(Projeto|Tese)(?=\\s*(?:·|$|—|\\|))", previous)
-        if match:
-            updated = previous[:match.start()] + display(match.group()) + previous[match.end():]
-            if updated != previous:
-                element.string = updated
-                changed = True
+        updated = previous
+        for old, new in ALIASES.items():
+            if previous.startswith(old + " ·"):
+                updated = new + previous[len(old):]
+            elif previous.endswith(" — " + old):
+                updated = previous[:-len(old)] + new
+        if updated != previous:
+            element.string = updated
+            changed = True
 
     for element in soup.select(".posted a, .post-navigation .category a"):
         label = element.get_text(" ", strip=True)
