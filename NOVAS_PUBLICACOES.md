@@ -14,7 +14,7 @@ Esta infraestrutura foi criada para acrescentar textos novos sem reescrever o ac
 
 Use `content/MODELO_DE_POST.md` como molde.
 
-As categorias aceitas são:
+As categorias aceitas são (use as formas padronizadas **Projetos** e **Ensaios**; `Projeto` e `Tese` antigos ainda são aceitos na importação para preservar compatibilidade):
 
 - BlogsFeras
 - Conto
@@ -34,8 +34,8 @@ As categorias aceitas são:
 - Afins_Rainer Maria Rilke, Afins_Robert Creeley, Afins_Sebastião Alba, Afins_Sylvia Plath
 - Afins_T. S. Eliot, Afins_Vasko Popa, Afins_Velimir Khlebnikov, Afins_Vladimir Maiakóvski
 - Afins_Wallace Stevens, Afins_William Butler Yeats, Afins_William Carlos Williams, Afins_Yves Bonnefoy
-- Projeto
-- Tese
+- Projetos
+- Ensaios
 
 `kind` pode ser `prose` ou `poetry`.
 
