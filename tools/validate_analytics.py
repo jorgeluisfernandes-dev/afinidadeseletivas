@@ -13,7 +13,7 @@ def main() -> int:
     measured = 0
     for path in sorted(ROOT.rglob("*.html")):
         html = path.read_text(encoding="utf-8")
-        if not re.search(r"</body\\s*>", html, flags=re.IGNORECASE):
+        if not re.search(r"</body\s*>", html, flags=re.IGNORECASE):
             # Arquivos de verificacao de propriedade podem nao ter corpo HTML.
             if BEACON in html:
                 issues.append(f"{path}: beacon fora de uma pagina HTML")
