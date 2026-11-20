@@ -35,6 +35,15 @@ jobs:
       - name: Organizar navegação e índices
         run: python tools/organize_navigation.py
 
+      - name: Uniformizar nomes de categorias
+        run: python tools/normalize_categories.py
+
+      - name: Inserir Cloudflare Web Analytics
+        run: python tools/inject_cloudflare_analytics.py
+
+      - name: Conferir coleta de estatisticas
+        run: python tools/validate_analytics.py
+
       - name: Validar links e arquivos locais
         run: python tools/validate_site.py
 

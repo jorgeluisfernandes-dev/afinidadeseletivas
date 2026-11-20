@@ -87,9 +87,16 @@ CATEGORY_DIR = {
     "PoetasAfins": "poetasafins",
     "Afins_Ferreira Gullar": "afins_ferreira_gullar",
     **AFINS_AUTHOR_SLUGS,
-    "Projeto": "projeto",
-    "Tese": "tese",
+    "Projetos": "projeto",
+    "Ensaios": "tese",
 }
+
+CATEGORY_ALIASES = {"Projeto": "Projetos", "Tese": "Ensaios"}
+
+
+def canonical_category(value: str) -> str:
+    return CATEGORY_ALIASES.get(value, value)
+
 
 POETRY_CATEGORIES = {"Poemas da Cabra", "PoesiasEletivas", "PoetasAfins", "Afins_Ferreira Gullar", *AFINS_AUTHOR_SLUGS}
 CATEGORY_DESCRIPTIONS = {
@@ -163,7 +170,7 @@ def parse_post(path: Path) -> Post:
     if not isinstance(d, date):
         raise ValueError(f"{path}: data inválida")
 
-    category = str(meta["category"])
+    category = canonical_category(str(meta["category"]))
     if category == "Poemas da Cabra":
         raise ValueError(f"{path}: use Afins_João Cabral de Melo Neto para novos textos")
     if category not in CATEGORY_DIR:
@@ -561,10 +568,10 @@ def collect_site_posts() -> list[SitePost]:
             continue
         category = ""
         if context:
-            category = context.get_text(" ", strip=True).split("·", 1)[0].strip()
+            category = canonical_category(context.get_text(" ", strip=True).split("·", 1)[0].strip())
         if category not in CATEGORY_DIR:
             posted = soup.select_one(".posted a")
-            category = posted.get_text(" ", strip=True) if posted else ""
+            category = canonical_category(posted.get_text(" ", strip=True)) if posted else ""
         if category not in CATEGORY_DIR:
             continue
         rel = PurePosixPath(path.relative_to(OUT).as_posix())
