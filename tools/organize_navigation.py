@@ -144,6 +144,9 @@ def make_search() -> None:
     for post in collect_site_posts():
         page = read(post.path)
         description = page.find("meta", attrs={"name": "description"})
+        # Pesquisa tambem o corpo do texto sem alterar sua apresentacao.
+        body = page.select_one("article.post-body")
+        full_text = " ".join(body.stripped_strings) if body else ""
         items.append({
             "title": post.title,
             "url": f"../{post.relpath}",
@@ -151,6 +154,7 @@ def make_search() -> None:
             "category": post.category,
             "summary": description.get("content", "") if description else "",
             "tags": [a.get_text(" ", strip=True) for a in page.select(".posted a.tag")],
+            "text": full_text[:80000],
         })
     directory = OUT / "busca"
     directory.mkdir(parents=True, exist_ok=True)
