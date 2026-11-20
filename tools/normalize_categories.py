@@ -31,7 +31,7 @@ def normalize_page(path: Path) -> bool:
             element.string = updated
             changed = True
 
-    for element in soup.select(".posted a, .post-navigation .category a"):
+    for element in soup.select(".posted a:not(.tag), .post-navigation .category a"):
         label = element.get_text(" ", strip=True)
         replacement = display(label)
         if replacement != label:
