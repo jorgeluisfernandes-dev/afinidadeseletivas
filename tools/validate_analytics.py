@@ -6,7 +6,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] / "_site"
 BEACON = "https://static.cloudflareinsights.com/beacon.min.js"
-TOKEN_PATTERN = re.compile(r'data-cf-beacon=[\\'"][^\\'"]*token', re.IGNORECASE)
 
 
 def main() -> int:
