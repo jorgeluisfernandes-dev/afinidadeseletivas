@@ -53,6 +53,9 @@ jobs:
       - name: Inserir Cloudflare Web Analytics
         run: python tools/inject_cloudflare_analytics.py
 
+      - name: Inserir Google Analytics GA4
+        run: python tools/inject_google_analytics.py
+
       - name: Conferir coleta de estatisticas
         run: python tools/validate_analytics.py
 
