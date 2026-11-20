@@ -5,8 +5,6 @@
   const status = document.getElementById('search-status');
   const results = document.getElementById('search-results');
   const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  const escapeHTML = value => String(value).replace(/[&<>"']/g, char =>
-    ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[char]));
   const PER_PAGE = 20;
   let index = null;
   let matches = [];
