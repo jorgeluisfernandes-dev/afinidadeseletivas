@@ -1,4 +1,4 @@
-"""Confere se o Cloudflare Web Analytics foi incluido exatamente uma vez por pagina."""
+"""Confere se Cloudflare e Google Analytics estao instalados uma vez por pagina."""
 from __future__ import annotations
 
 import re
@@ -6,6 +6,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] / "_site"
 BEACON = "https://static.cloudflareinsights.com/beacon.min.js"
+GOOGLE = "https://www.googletagmanager.com/gtag/js?id=G-RPTB8H6JGP"
+GA_CONFIG = "gtag('config', 'G-RPTB8H6JGP')"
 
 
 def main() -> int:
@@ -19,11 +21,13 @@ def main() -> int:
                 issues.append(f"{path}: beacon fora de uma pagina HTML")
             continue
         count = html.count(BEACON)
-        if count != 1:
-            issues.append(f"{path.relative_to(ROOT)}: {count} scripts de analytics (esperado: 1)")
+        google_count = html.count(GOOGLE)
+        config_count = html.count(GA_CONFIG)
+        if count != 1 or google_count != 1 or config_count != 1:
+            issues.append(f"{path.relative_to(ROOT)}: Cloudflare={count}, Google={google_count}, GA4 config={config_count}; esperado 1 de cada")
         else:
             measured += 1
-    print(f"Paginas com coleta Cloudflare: {measured}")
+    print(f"Paginas com Cloudflare e Google Analytics GA4: {measured}")
     print(f"Erros de instalacao do contador: {len(issues)}")
     for issue in issues[:30]:
         print("  " + issue)
