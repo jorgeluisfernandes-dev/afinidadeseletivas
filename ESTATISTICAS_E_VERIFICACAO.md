@@ -1,9 +1,9 @@
 # Estatísticas e verificação do Afinidades Eletivas
 
-O site usa **Cloudflare Web Analytics**. Durante a publicação no GitHub Pages,
+O site usa **Cloudflare Web Analytics** e **Google Analytics 4 (GA4)**, com identificador público de medição `G-RPTB8H6JGP`. Durante a publicação no GitHub Pages,
 `tools/inject_cloudflare_analytics.py` instala o beacon nas páginas HTML.
-`tools/validate_analytics.py` verifica automaticamente se cada página HTML
-com fechamento `</body>` recebeu o beacon **uma vez**, evitando ausência
+`tools/inject_google_analytics.py` instala o Google Analytics no `<head>`;`tools/validate_analytics.py` verifica automaticamente se cada página HTML
+com fechamento `</body>` recebeu **uma vez cada serviço**, evitando ausência
 acidental ou duplicação da coleta. A página de verificação do Google, que não
 contém corpo HTML, é excluída desse requisito.
 
@@ -62,3 +62,15 @@ valida o analytics, verifica links e só depois permite a publicação.
 As categorias visíveis padronizadas são **Projetos** e **Ensaios**. Os
 endereços históricos `/projeto/` e `/tese/` permanecem os mesmos, assim
 como os endereços originais dos artigos.
+
+## Google Analytics 4 (GA4)
+
+1. Abra https://analytics.google.com/ e selecione a propriedade do Afinidades.
+2. Entre em **Relatórios → Tempo real** e visite https://afinidadeseletivas.com/ numa janela de navegador sem bloqueador de rastreamento (somente para este teste).
+3. Verifique se aparece pelo menos uma visualização. Pode haver atraso no recebimento.
+4. Para conferir a instalação, abra o código-fonte da página e procure `G-RPTB8H6JGP` — deve aparecer no carregamento do `gtag.js` e na chamada de configuração.
+5. Em **Relatórios → Engajamento → Páginas e telas**, examine os textos mais lidos depois que houver dados.
+
+O GA4 não reconstrói visitas anteriores à instalação. Os números de GA4 e Cloudflare podem diferir porque a metodologia de coleta, bloqueadores e definições de métricas não são idênticos. Não some os totais das duas ferramentas.
+
+**Privacidade:** avalie as obrigações de informação e consentimento previstas na LGPD antes de usar ferramentas de rastreamento em produção, e ajuste eventuais avisos de privacidade/consentimento conforme sua configuração. O ID `G-` é público; nunca publique acessos à conta ou chaves privadas.
