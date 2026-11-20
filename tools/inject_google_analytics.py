@@ -33,7 +33,7 @@ def main() -> int:
         html = path.read_text(encoding="utf-8")
         head = re.search(r"<head\\b[^>]*>", html, flags=re.IGNORECASE)
         body = re.search(r"</body\\s*>", html, flags=re.IGNORECASE)
-        if not head and not body:
+        if not head and not re.search(r"</body\s*>", html, flags=re.IGNORECASE):
             # Arquivos simples de verificacao de dominio, sem documento HTML.
             skipped.append(path.relative_to(SITE).as_posix())
             continue
